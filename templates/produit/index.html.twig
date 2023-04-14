@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProduitController!
+{% endblock %}
+
+{% block body %}
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>{{ ttskch_paginator_sortable('id') }}</th>
+				<th>{{ ttskch_paginator_sortable('nom') }}</th>
+				<th>{{ ttskch_paginator_sortable('description') }}</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for foo in foos %}
+				<tr>
+					<td>{{ foo.id }}</td>
+					<td>{{ foo.nom }}</td>
+					<td>{{ foo.description }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	{{ ttskch_paginator_pager() }}
+{% endblock %}

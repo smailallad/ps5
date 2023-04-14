@@ -2,13 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\CouponsTypesRepository;
+use App\Repository\CouponTypeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CouponsTypesRepository::class)]
-class CouponsTypes
+#[ORM\Entity(repositoryClass: CouponTypeRepository::class)]
+class CouponType
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -16,14 +16,14 @@ class CouponsTypes
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
-    private ?string $name = null;
+    private ?string $nom = null;
 
-    #[ORM\OneToMany(mappedBy: 'coupons_types', targetEntity: Coupons::class, orphanRemoval: true)]
-    private Collection $coupons;
+    #[ORM\OneToMany(mappedBy: 'coupon_type', targetEntity: Coupon::class, orphanRemoval: true)]
+    private Collection $Coupon;
 
     public function __construct()
     {
-        $this->coupons = new ArrayCollection();
+        $this->Coupon = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -31,39 +31,39 @@ class CouponsTypes
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNom(): ?string
     {
-        return $this->name;
+        return $this->nom;
     }
 
-    public function setName(string $name): self
+    public function setNom(string $nom): self
     {
-        $this->name = $name;
+        $this->nom = $nom;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Coupons>
+     * @return Collection<int, Coupon>
      */
     public function getCoupons(): Collection
     {
-        return $this->coupons;
+        return $this->Coupon;
     }
 
-    public function addCoupon(Coupons $coupon): self
+    public function addCoupon(Coupon $coupon): self
     {
-        if (!$this->coupons->contains($coupon)) {
-            $this->coupons->add($coupon);
+        if (!$this->Coupon->contains($coupon)) {
+            $this->Coupon->add($coupon);
             $coupon->setCouponsTypes($this);
         }
 
         return $this;
     }
 
-    public function removeCoupon(Coupons $coupon): self
+    public function removeCoupon(Coupon $coupon): self
     {
-        if ($this->coupons->removeElement($coupon)) {
+        if ($this->Coupon->removeElement($coupon)) {
             // set the owning side to null (unless already changed)
             if ($coupon->getCouponsTypes() === $this) {
                 $coupon->setCouponsTypes(null);

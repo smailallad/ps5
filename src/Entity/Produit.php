@@ -11,7 +11,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProductsRepository::class)]
-class Products
+class Produit
 {
     use CreatedAtTrait;
     use SlugTrait;
@@ -22,31 +22,31 @@ class Products
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private ?string $nom = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
     #[ORM\Column]
-    private ?int $price = null;
+    private ?int $prix = null;
 
     #[ORM\Column]
     private ?int $stock = null;
 
-    #[ORM\ManyToOne(inversedBy: 'products')]
+    #[ORM\ManyToOne(inversedBy: 'Produit')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Categories $categiries = null;
+    private ?Categorie $categiries = null;
 
-    #[ORM\OneToMany(mappedBy: 'products', targetEntity: Images::class, orphanRemoval: true)]
-    private Collection $images;
+    #[ORM\OneToMany(mappedBy: 'Produit', targetEntity: Image::class, orphanRemoval: true)]
+    private Collection $Image;
 
-    #[ORM\OneToMany(mappedBy: 'products', targetEntity: OrdersDetails::class)]
-    private Collection $ordersDetails;
+    #[ORM\OneToMany(mappedBy: 'Produit', targetEntity: CommandeDetail::class)]
+    private Collection $CommandeDetail;
 
     public function __construct()
     {
-        $this->images = new ArrayCollection();
-        $this->ordersDetails = new ArrayCollection();
+        $this->Image = new ArrayCollection();
+        $this->CommandeDetail = new ArrayCollection();
         $this->created_at = new \DateTimeImmutable();
     }
 
@@ -55,14 +55,14 @@ class Products
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNom(): ?string
     {
-        return $this->name;
+        return $this->nom;
     }
 
-    public function setName(string $name): self
+    public function setNom(string $nom): self
     {
-        $this->name = $name;
+        $this->nom = $nom;
 
         return $this;
     }
@@ -79,14 +79,14 @@ class Products
         return $this;
     }
 
-    public function getPrice(): ?int
+    public function getPrix(): ?int
     {
-        return $this->price;
+        return $this->prix;
     }
 
-    public function setPrice(int $price): self
+    public function setPrix(int $prix): self
     {
-        $this->price = $price;
+        $this->prix = $prix;
 
         return $this;
     }
@@ -103,12 +103,12 @@ class Products
         return $this;
     }
 
-    public function getCategiries(): ?Categories
+    public function getCategiries(): ?Categorie
     {
         return $this->categiries;
     }
 
-    public function setCategiries(?Categories $categiries): self
+    public function setCategiries(?Categorie $categiries): self
     {
         $this->categiries = $categiries;
 
@@ -116,26 +116,26 @@ class Products
     }
 
     /**
-     * @return Collection<int, Images>
+     * @return Collection<int, Image>
      */
     public function getImages(): Collection
     {
-        return $this->images;
+        return $this->Image;
     }
 
-    public function addImage(Images $image): self
+    public function addImage(Image $image): self
     {
-        if (!$this->images->contains($image)) {
-            $this->images->add($image);
+        if (!$this->Image->contains($image)) {
+            $this->Image->add($image);
             $image->setProducts($this);
         }
 
         return $this;
     }
 
-    public function removeImage(Images $image): self
+    public function removeImage(Image $image): self
     {
-        if ($this->images->removeElement($image)) {
+        if ($this->Image->removeElement($image)) {
             // set the owning side to null (unless already changed)
             if ($image->getProducts() === $this) {
                 $image->setProducts(null);
@@ -146,26 +146,26 @@ class Products
     }
 
     /**
-     * @return Collection<int, OrdersDetails>
+     * @return Collection<int, CommandeDetail>
      */
     public function getOrdersDetails(): Collection
     {
-        return $this->ordersDetails;
+        return $this->CommandeDetail;
     }
 
-    public function addOrdersDetail(OrdersDetails $ordersDetail): self
+    public function addOrdersDetail(CommandeDetail $ordersDetail): self
     {
-        if (!$this->ordersDetails->contains($ordersDetail)) {
-            $this->ordersDetails->add($ordersDetail);
+        if (!$this->CommandeDetail->contains($ordersDetail)) {
+            $this->CommandeDetail->add($ordersDetail);
             $ordersDetail->setProducts($this);
         }
 
         return $this;
     }
 
-    public function removeOrdersDetail(OrdersDetails $ordersDetail): self
+    public function removeOrdersDetail(CommandeDetail $ordersDetail): self
     {
-        if ($this->ordersDetails->removeElement($ordersDetail)) {
+        if ($this->CommandeDetail->removeElement($ordersDetail)) {
             // set the owning side to null (unless already changed)
             if ($ordersDetail->getProducts() === $this) {
                 $ordersDetail->setProducts(null);

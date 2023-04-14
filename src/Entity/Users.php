@@ -49,12 +49,12 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $city = null;
 
-    #[ORM\OneToMany(mappedBy: 'users', targetEntity: Orders::class)]
-    private Collection $orders;
+    #[ORM\OneToMany(mappedBy: 'users', targetEntity: Commande::class)]
+    private Collection $Commande;
 
     public function __construct()
     {
-        $this->orders = new ArrayCollection();
+        $this->Commande = new ArrayCollection();
         $this->created_at = new \DateTimeImmutable();
     }
 
@@ -209,26 +209,26 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     /**
-     * @return Collection<int, Orders>
+     * @return Collection<int, Commande>
      */
     public function getOrders(): Collection
     {
-        return $this->orders;
+        return $this->Commande;
     }
 
-    public function addOrder(Orders $order): self
+    public function addOrder(Commande $order): self
     {
-        if (!$this->orders->contains($order)) {
-            $this->orders->add($order);
+        if (!$this->Commande->contains($order)) {
+            $this->Commande->add($order);
             $order->setUsers($this);
         }
 
         return $this;
     }
 
-    public function removeOrder(Orders $order): self
+    public function removeOrder(Commande $order): self
     {
-        if ($this->orders->removeElement($order)) {
+        if ($this->Commande->removeElement($order)) {
             // set the owning side to null (unless already changed)
             if ($order->getUsers() === $this) {
                 $order->setUsers(null);

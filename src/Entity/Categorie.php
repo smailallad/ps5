@@ -2,15 +2,14 @@
 
 namespace App\Entity;
 
-use App\Entity\Trait\createdAtTrait;
 use App\Entity\Trait\SlugTrait;
-use App\Repository\CategoriesRepository;
+use App\Repository\CategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CategoriesRepository::class)]
-class Categories
+#[ORM\Entity(repositoryClass: CategorieRepository::class)]
+class Categorie
 {
     use SlugTrait;
 
@@ -20,22 +19,22 @@ class Categories
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
-    private ?string $name = null;
+    private ?string $nom = null;
 
-    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'categories')]
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'Categorie')]
     #[ORM\JoinColumn(onDelete: 'CASCADE')]
     private ?self $parent = null;
 
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
-    private Collection $categories;
+    private Collection $Categorie;
 
-    #[ORM\OneToMany(mappedBy: 'categiries', targetEntity: Products::class)]
-    private Collection $products;
+    #[ORM\OneToMany(mappedBy: 'categiries', targetEntity: Produit::class)]
+    private Collection $Produit;
 
     public function __construct()
     {
-        $this->categories = new ArrayCollection();
-        $this->products = new ArrayCollection();
+        $this->Categorie = new ArrayCollection();
+        $this->Produit = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -43,14 +42,14 @@ class Categories
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNom(): ?string
     {
-        return $this->name;
+        return $this->nom;
     }
 
-    public function setName(string $name): self
+    public function setNom(string $nom): self
     {
-        $this->name = $name;
+        $this->nom = $nom;
 
         return $this;
     }
@@ -72,13 +71,13 @@ class Categories
      */
     public function getCategories(): Collection
     {
-        return $this->categories;
+        return $this->Categorie;
     }
 
     public function addCategory(self $category): self
     {
-        if (!$this->categories->contains($category)) {
-            $this->categories->add($category);
+        if (!$this->Categorie->contains($category)) {
+            $this->Categorie->add($category);
             $category->setParent($this);
         }
 
@@ -87,7 +86,7 @@ class Categories
 
     public function removeCategory(self $category): self
     {
-        if ($this->categories->removeElement($category)) {
+        if ($this->Categorie->removeElement($category)) {
             // set the owning side to null (unless already changed)
             if ($category->getParent() === $this) {
                 $category->setParent(null);
@@ -98,26 +97,26 @@ class Categories
     }
 
     /**
-     * @return Collection<int, Products>
+     * @return Collection<int, Produit>
      */
     public function getProducts(): Collection
     {
-        return $this->products;
+        return $this->Produit;
     }
 
-    public function addProduct(Products $product): self
+    public function addProduct(Produit $product): self
     {
-        if (!$this->products->contains($product)) {
-            $this->products->add($product);
+        if (!$this->Produit->contains($product)) {
+            $this->Produit->add($product);
             $product->setCategiries($this);
         }
 
         return $this;
     }
 
-    public function removeProduct(Products $product): self
+    public function removeProduct(Produit $product): self
     {
-        if ($this->products->removeElement($product)) {
+        if ($this->Produit->removeElement($product)) {
             // set the owning side to null (unless already changed)
             if ($product->getCategiries() === $this) {
                 $product->setCategiries(null);

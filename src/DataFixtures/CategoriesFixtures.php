@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Categories;
+use App\Entity\Categorie;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -26,11 +26,11 @@ class CategoriesFixtures extends Fixture
         $this->createCategory('Enfant', $parent, $manager);
         $manager->flush();
     }
-    private function createCategory(string $name, Categories $parent = null, ObjectManager $manager)
+    private function createCategory(string $name, Categorie $parent = null, ObjectManager $manager)
     {
-        $category = new Categories();
-        $category->setName($name);
-        $category->setSlug($this->slugger->slug($category->getName())->lower());
+        $category = new Categorie();
+        $category->setNom($name);
+        $category->setSlug($this->slugger->slug($category->getNom())->lower());
         $category->setParent($parent);
         $manager->persist($category);
 

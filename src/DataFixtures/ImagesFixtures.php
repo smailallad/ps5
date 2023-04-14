@@ -2,7 +2,7 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Images;
+use App\Entity\Image;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -14,8 +14,8 @@ class ImagesFixtures extends Fixture implements DependentFixtureInterface
     {
         $faker = Faker\Factory::create('fr_FR');
         for ($i = 1; $i <= 10; $i++) {
-            $image = new Images();
-            $image->setName($faker->image(null, 640, 480));
+            $image = new Image();
+            $image->setNom($faker->image(null, 640, 480));
             $product = $this->getReference('prod-' . rand(1, 10));
             $image->setProducts($product);
             $manager->persist($image);

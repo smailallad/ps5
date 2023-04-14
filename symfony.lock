@@ -201,6 +201,9 @@
             "config/routes/web_profiler.yaml"
         ]
     },
+    "ttskch/paginator-bundle": {
+        "version": "4.1.0"
+    },
     "twig/extra-bundle": {
         "version": "v3.5.1"
     }

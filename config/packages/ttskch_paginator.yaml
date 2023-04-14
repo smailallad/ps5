@@ -1,0 +1,4 @@
+ttskch_paginator:
+    template:
+        pager: '@TtskchPaginator/pager/bootstrap5.html.twig'
+#       pager: '@TtskchPaginator/pager/bootstrap4.html.twig'
