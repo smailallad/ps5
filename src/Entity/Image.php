@@ -6,7 +6,7 @@ use App\Repository\ImagesRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ImagesRepository::class)]
-class Images
+class Image
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -14,37 +14,37 @@ class Images
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $name = null;
+    private ?string $nom = null;
 
-    #[ORM\ManyToOne(inversedBy: 'images')]
+    #[ORM\ManyToOne(inversedBy: 'Image')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Products $products = null;
+    private ?Produit $Produit = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getNom(): ?string
     {
-        return $this->name;
+        return $this->nom;
     }
 
-    public function setName(string $name): self
+    public function setNom(string $nom): self
     {
-        $this->name = $name;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function getProducts(): ?Products
+    public function getProducts(): ?Produit
     {
-        return $this->products;
+        return $this->Produit;
     }
 
-    public function setProducts(?Products $products): self
+    public function setProducts(?Produit $Produit): self
     {
-        $this->products = $products;
+        $this->Produit = $Produit;
 
         return $this;
     }

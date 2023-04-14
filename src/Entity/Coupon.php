@@ -3,14 +3,14 @@
 namespace App\Entity;
 
 use App\Entity\Trait\CreatedAtTrait;
-use App\Repository\CouponsRepository;
+use App\Repository\CouponRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CouponsRepository::class)]
-class Coupons
+#[ORM\Entity(repositoryClass: CouponRepository::class)]
+class Coupon
 {
     use CreatedAtTrait;
 
@@ -26,7 +26,7 @@ class Coupons
     private ?string $description = null;
 
     #[ORM\Column]
-    private ?int $discount = null;
+    private ?int $remise = null;
 
     #[ORM\Column]
     private ?int $max_usage = null;
@@ -37,16 +37,16 @@ class Coupons
     #[ORM\Column]
     private ?bool $is_valide = null;
 
-    #[ORM\ManyToOne(inversedBy: 'coupons')]
+    #[ORM\ManyToOne(inversedBy: 'Coupon')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?CouponsTypes $coupons_types = null;
+    private ?CouponType $coupon_type = null;
 
-    #[ORM\OneToMany(mappedBy: 'coupons', targetEntity: Orders::class)]
-    private Collection $orders;
+    #[ORM\OneToMany(mappedBy: 'Coupon', targetEntity: Commande::class)]
+    private Collection $Commande;
 
     public function __construct()
     {
-        $this->orders = new ArrayCollection();
+        $this->Commande = new ArrayCollection();
         $this->created_at = new \DateTimeImmutable();
     }
 
@@ -79,14 +79,14 @@ class Coupons
         return $this;
     }
 
-    public function getDiscount(): ?int
+    public function getRemise(): ?int
     {
-        return $this->discount;
+        return $this->remise;
     }
 
-    public function setDiscount(int $discount): self
+    public function setRemise(int $remise): self
     {
-        $this->discount = $discount;
+        $this->remise = $remise;
 
         return $this;
     }
@@ -127,39 +127,39 @@ class Coupons
         return $this;
     }
 
-    public function getCouponsTypes(): ?CouponsTypes
+    public function getCouponsTypes(): ?CouponType
     {
-        return $this->coupons_types;
+        return $this->coupon_type;
     }
 
-    public function setCouponsTypes(?CouponsTypes $coupons_types): self
+    public function setCouponsTypes(?CouponType $coupon_type): self
     {
-        $this->coupons_types = $coupons_types;
+        $this->coupon_type = $coupon_type;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Orders>
+     * @return Collection<int, Commande>
      */
     public function getOrders(): Collection
     {
-        return $this->orders;
+        return $this->Commande;
     }
 
-    public function addOrder(Orders $order): self
+    public function addOrder(Commande $order): self
     {
-        if (!$this->orders->contains($order)) {
-            $this->orders->add($order);
+        if (!$this->Commande->contains($order)) {
+            $this->Commande->add($order);
             $order->setCoupons($this);
         }
 
         return $this;
     }
 
-    public function removeOrder(Orders $order): self
+    public function removeOrder(Commande $order): self
     {
-        if ($this->orders->removeElement($order)) {
+        if ($this->Commande->removeElement($order)) {
             // set the owning side to null (unless already changed)
             if ($order->getCoupons() === $this) {
                 $order->setCoupons(null);
