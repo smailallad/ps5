@@ -4,29 +4,6 @@
 {% endblock %}
 
 {% block body %}
-<<<<<<< HEAD
-	<table class="table table-striped">
-		<thead>
-			<tr>
-				<th>{{ ttskch_paginator_sortable('id') }}</th>
-				<th>{{ ttskch_paginator_sortable('nom') }}</th>
-				<th>{{ ttskch_paginator_sortable('description') }}</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% for foo in foos %}
-				<tr>
-					<td>{{ foo.id }}</td>
-					<td>{{ foo.nom }}</td>
-					<td>{{ foo.description }}</td>
-				</tr>
-			{% endfor %}
-		</tbody>
-	</table>
-
-	{{ ttskch_paginator_pager() }}
-{% endblock %}
-=======
 	{{ form(form, {action: path('produit_index'), method: 'get'}) }}
 
 		<table class="table table-striped">
@@ -50,4 +27,3 @@
 
 		{{ ttskch_paginator_pager() }}
 	{% endblock %}
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505

@@ -2,17 +2,10 @@
 
 namespace App\Entity;
 
-<<<<<<< HEAD
 use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
-=======
-use App\Repository\ImagesRepository;
-use Doctrine\ORM\Mapping as ORM;
-
-#[ORM\Entity(repositoryClass: ImagesRepository::class)]
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
 class Image
 {
     #[ORM\Id]
@@ -55,7 +48,6 @@ class Image
 
         return $this;
     }
-<<<<<<< HEAD
 
     public function getProduit(): ?Produit
     {
@@ -68,6 +60,4 @@ class Image
 
         return $this;
     }
-=======
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
 }

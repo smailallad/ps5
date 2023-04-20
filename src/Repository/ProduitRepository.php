@@ -3,16 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Produit;
-<<<<<<< HEAD
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Persistence\ManagerRegistry;
-=======
 use App\Form\ProduitCriteria;
 use Doctrine\Persistence\ManagerRegistry;
 use Ttskch\PaginatorBundle\Doctrine\Slicer;
 use Ttskch\PaginatorBundle\Doctrine\Counter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
 
 /**
  * @extends ServiceEntityRepository<Produit>
@@ -46,9 +41,6 @@ class ProduitRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-<<<<<<< HEAD
-
-=======
     public function sliceByCriteria(ProduitCriteria $criteria)
     {
         $qb = $this->createQueryBuilderFromCriteria($criteria);
@@ -72,7 +64,6 @@ class ProduitRepository extends ServiceEntityRepository
             ->orWhere('f.description like :query')
             ->setParameter('query', '%' . str_replace('%', '\%', $criteria->query) . '%');
     }
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
     //    /**
     //     * @return Produit[] Returns an array of Produit objects
     //     */

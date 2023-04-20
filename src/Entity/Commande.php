@@ -107,7 +107,6 @@ class Commande
 
         return $this;
     }
-<<<<<<< HEAD
 
     public function getCoupon(): ?Coupon
     {
@@ -150,6 +149,4 @@ class Commande
 
         return $this;
     }
-=======
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
 }

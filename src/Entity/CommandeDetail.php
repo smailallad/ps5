@@ -71,7 +71,6 @@ class CommandeDetail
 
         return $this;
     }
-<<<<<<< HEAD
 
     public function getCommande(): ?Commande
     {
@@ -96,6 +95,4 @@ class CommandeDetail
 
         return $this;
     }
-=======
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
 }

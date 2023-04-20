@@ -28,22 +28,13 @@ class Categorie
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
     private Collection $Categorie;
 
-<<<<<<< HEAD
     #[ORM\OneToMany(mappedBy: 'categirie', targetEntity: Produit::class)]
     private Collection $Produits;
-=======
-    #[ORM\OneToMany(mappedBy: 'categiries', targetEntity: Produit::class)]
-    private Collection $Produit;
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
 
     public function __construct()
     {
         $this->Categorie = new ArrayCollection();
-<<<<<<< HEAD
         $this->Produits = new ArrayCollection();
-=======
-        $this->Produit = new ArrayCollection();
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
     }
 
     public function getId(): ?int
@@ -110,22 +101,13 @@ class Categorie
      */
     public function getProducts(): Collection
     {
-<<<<<<< HEAD
         return $this->Produits;
-=======
-        return $this->Produit;
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
     }
 
     public function addProduct(Produit $product): self
     {
-<<<<<<< HEAD
         if (!$this->Produits->contains($product)) {
             $this->Produits->add($product);
-=======
-        if (!$this->Produit->contains($product)) {
-            $this->Produit->add($product);
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
             $product->setCategiries($this);
         }
 
@@ -134,11 +116,7 @@ class Categorie
 
     public function removeProduct(Produit $product): self
     {
-<<<<<<< HEAD
         if ($this->Produits->removeElement($product)) {
-=======
-        if ($this->Produit->removeElement($product)) {
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
             // set the owning side to null (unless already changed)
             if ($product->getCategiries() === $this) {
                 $product->setCategiries(null);
@@ -147,7 +125,6 @@ class Categorie
 
         return $this;
     }
-<<<<<<< HEAD
 
     /**
      * @return Collection<int, Categorie>
@@ -208,6 +185,4 @@ class Categorie
 
         return $this;
     }
-=======
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
 }

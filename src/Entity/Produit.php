@@ -4,21 +4,13 @@ namespace App\Entity;
 
 use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Trait\SlugTrait;
-<<<<<<< HEAD
-use App\Repository\ProduitRepository;
-=======
 use App\Repository\ProductsRepository;
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-<<<<<<< HEAD
-#[ORM\Entity(repositoryClass: ProduitRepository::class)]
-=======
 #[ORM\Entity(repositoryClass: ProductsRepository::class)]
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
 class Produit
 {
     use CreatedAtTrait;
@@ -41,15 +33,9 @@ class Produit
     #[ORM\Column]
     private ?int $stock = null;
 
-<<<<<<< HEAD
     #[ORM\ManyToOne(inversedBy: 'Produits')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Categorie $categirie = null;
-=======
-    #[ORM\ManyToOne(inversedBy: 'Produit')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Categorie $categiries = null;
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
 
     #[ORM\OneToMany(mappedBy: 'Produit', targetEntity: Image::class, orphanRemoval: true)]
     private Collection $Image;
@@ -119,20 +105,12 @@ class Produit
 
     public function getCategiries(): ?Categorie
     {
-<<<<<<< HEAD
         return $this->categirie;
-=======
-        return $this->categiries;
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
     }
 
     public function setCategiries(?Categorie $categiries): self
     {
-<<<<<<< HEAD
         $this->categirie = $categiries;
-=======
-        $this->categiries = $categiries;
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
 
         return $this;
     }
@@ -196,7 +174,6 @@ class Produit
 
         return $this;
     }
-<<<<<<< HEAD
 
     public function getCategirie(): ?Categorie
     {
@@ -247,6 +224,4 @@ class Produit
 
         return $this;
     }
-=======
->>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
 }
