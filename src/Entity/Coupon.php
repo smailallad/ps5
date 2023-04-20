@@ -127,48 +127,6 @@ class Coupon
         return $this;
     }
 
-    public function getCouponsTypes(): ?CouponType
-    {
-        return $this->coupon_type;
-    }
-
-    public function setCouponsTypes(?CouponType $coupon_type): self
-    {
-        $this->coupon_type = $coupon_type;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Commande>
-     */
-    public function getOrders(): Collection
-    {
-        return $this->Commande;
-    }
-
-    public function addOrder(Commande $order): self
-    {
-        if (!$this->Commande->contains($order)) {
-            $this->Commande->add($order);
-            $order->setCoupons($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrder(Commande $order): self
-    {
-        if ($this->Commande->removeElement($order)) {
-            // set the owning side to null (unless already changed)
-            if ($order->getCoupons() === $this) {
-                $order->setCoupons(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getCouponType(): ?CouponType
     {
         return $this->coupon_type;

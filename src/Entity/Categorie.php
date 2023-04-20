@@ -67,66 +67,6 @@ class Categorie
     }
 
     /**
-     * @return Collection<int, self>
-     */
-    public function getCategories(): Collection
-    {
-        return $this->Categorie;
-    }
-
-    public function addCategory(self $category): self
-    {
-        if (!$this->Categorie->contains($category)) {
-            $this->Categorie->add($category);
-            $category->setParent($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategory(self $category): self
-    {
-        if ($this->Categorie->removeElement($category)) {
-            // set the owning side to null (unless already changed)
-            if ($category->getParent() === $this) {
-                $category->setParent(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Produit>
-     */
-    public function getProducts(): Collection
-    {
-        return $this->Produits;
-    }
-
-    public function addProduct(Produit $product): self
-    {
-        if (!$this->Produits->contains($product)) {
-            $this->Produits->add($product);
-            $product->setCategiries($this);
-        }
-
-        return $this;
-    }
-
-    public function removeProduct(Produit $product): self
-    {
-        if ($this->Produits->removeElement($product)) {
-            // set the owning side to null (unless already changed)
-            if ($product->getCategiries() === $this) {
-                $product->setCategiries(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Categorie>
      */
     public function getCategorie(): Collection

@@ -46,7 +46,7 @@ class CouponType
     /**
      * @return Collection<int, Coupon>
      */
-    public function getCoupons(): Collection
+    public function getCoupon(): Collection
     {
         return $this->Coupon;
     }
@@ -55,7 +55,7 @@ class CouponType
     {
         if (!$this->Coupon->contains($coupon)) {
             $this->Coupon->add($coupon);
-            $coupon->setCouponsTypes($this);
+            $coupon->setCouponType($this);
         }
 
         return $this;
@@ -65,19 +65,11 @@ class CouponType
     {
         if ($this->Coupon->removeElement($coupon)) {
             // set the owning side to null (unless already changed)
-            if ($coupon->getCouponsTypes() === $this) {
-                $coupon->setCouponsTypes(null);
+            if ($coupon->getCouponType() === $this) {
+                $coupon->setCouponType(null);
             }
         }
 
         return $this;
-    }
-
-    /**
-     * @return Collection<int, Coupon>
-     */
-    public function getCoupon(): Collection
-    {
-        return $this->Coupon;
     }
 }

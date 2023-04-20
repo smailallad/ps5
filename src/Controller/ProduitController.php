@@ -12,9 +12,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
+#[Route('/Produit', name: 'produit_')]
 class ProduitController extends AbstractController
 {
-    #[Route('/produit', name: 'produit_index')]
+    #[Route('/index', name: 'index')]
     public function index(ProduitRepository $produitRepository, Context $context): Response
     {
         $context->initialize(

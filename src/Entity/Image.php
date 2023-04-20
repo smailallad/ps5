@@ -37,18 +37,6 @@ class Image
         return $this;
     }
 
-    public function getProducts(): ?Produit
-    {
-        return $this->Produit;
-    }
-
-    public function setProducts(?Produit $Produit): self
-    {
-        $this->Produit = $Produit;
-
-        return $this;
-    }
-
     public function getProduit(): ?Produit
     {
         return $this->Produit;

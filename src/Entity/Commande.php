@@ -54,12 +54,12 @@ class Commande
         return $this;
     }
 
-    public function getCoupons(): ?Coupon
+    public function getCoupon(): ?Coupon
     {
         return $this->Coupon;
     }
 
-    public function setCoupons(?Coupon $Coupon): self
+    public function setCoupon(?Coupon $Coupon): self
     {
         $this->Coupon = $Coupon;
 
@@ -74,48 +74,6 @@ class Commande
     public function setUsers(?Users $users): self
     {
         $this->users = $users;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, CommandeDetail>
-     */
-    public function getOrdersDetails(): Collection
-    {
-        return $this->CommandeDetail;
-    }
-
-    public function addOrdersDetail(CommandeDetail $ordersDetail): self
-    {
-        if (!$this->CommandeDetail->contains($ordersDetail)) {
-            $this->CommandeDetail->add($ordersDetail);
-            $ordersDetail->setOrders($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrdersDetail(CommandeDetail $ordersDetail): self
-    {
-        if ($this->CommandeDetail->removeElement($ordersDetail)) {
-            // set the owning side to null (unless already changed)
-            if ($ordersDetail->getOrders() === $this) {
-                $ordersDetail->setOrders(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getCoupon(): ?Coupon
-    {
-        return $this->Coupon;
-    }
-
-    public function setCoupon(?Coupon $Coupon): self
-    {
-        $this->Coupon = $Coupon;
 
         return $this;
     }
