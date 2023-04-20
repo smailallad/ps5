@@ -4,13 +4,13 @@ namespace App\Entity;
 
 use App\Entity\Trait\CreatedAtTrait;
 use App\Entity\Trait\SlugTrait;
-use App\Repository\ProductsRepository;
+use App\Repository\ProduitRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ProductsRepository::class)]
+#[ORM\Entity(repositoryClass: ProduitRepository::class)]
 class Produit
 {
     use CreatedAtTrait;
@@ -33,9 +33,9 @@ class Produit
     #[ORM\Column]
     private ?int $stock = null;
 
-    #[ORM\ManyToOne(inversedBy: 'Produit')]
+    #[ORM\ManyToOne(inversedBy: 'Produits')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Categorie $categiries = null;
+    private ?Categorie $categirie = null;
 
     #[ORM\OneToMany(mappedBy: 'Produit', targetEntity: Image::class, orphanRemoval: true)]
     private Collection $Image;
@@ -105,12 +105,12 @@ class Produit
 
     public function getCategiries(): ?Categorie
     {
-        return $this->categiries;
+        return $this->categirie;
     }
 
     public function setCategiries(?Categorie $categiries): self
     {
-        $this->categiries = $categiries;
+        $this->categirie = $categiries;
 
         return $this;
     }
@@ -169,6 +169,56 @@ class Produit
             // set the owning side to null (unless already changed)
             if ($ordersDetail->getProducts() === $this) {
                 $ordersDetail->setProducts(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCategirie(): ?Categorie
+    {
+        return $this->categirie;
+    }
+
+    public function setCategirie(?Categorie $categirie): self
+    {
+        $this->categirie = $categirie;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Image>
+     */
+    public function getImage(): Collection
+    {
+        return $this->Image;
+    }
+
+    /**
+     * @return Collection<int, CommandeDetail>
+     */
+    public function getCommandeDetail(): Collection
+    {
+        return $this->CommandeDetail;
+    }
+
+    public function addCommandeDetail(CommandeDetail $commandeDetail): self
+    {
+        if (!$this->CommandeDetail->contains($commandeDetail)) {
+            $this->CommandeDetail->add($commandeDetail);
+            $commandeDetail->setProduit($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandeDetail(CommandeDetail $commandeDetail): self
+    {
+        if ($this->CommandeDetail->removeElement($commandeDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($commandeDetail->getProduit() === $this) {
+                $commandeDetail->setProduit(null);
             }
         }
 

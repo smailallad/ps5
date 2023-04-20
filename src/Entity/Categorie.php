@@ -28,13 +28,13 @@ class Categorie
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: self::class)]
     private Collection $Categorie;
 
-    #[ORM\OneToMany(mappedBy: 'categiries', targetEntity: Produit::class)]
-    private Collection $Produit;
+    #[ORM\OneToMany(mappedBy: 'categirie', targetEntity: Produit::class)]
+    private Collection $Produits;
 
     public function __construct()
     {
         $this->Categorie = new ArrayCollection();
-        $this->Produit = new ArrayCollection();
+        $this->Produits = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -101,13 +101,13 @@ class Categorie
      */
     public function getProducts(): Collection
     {
-        return $this->Produit;
+        return $this->Produits;
     }
 
     public function addProduct(Produit $product): self
     {
-        if (!$this->Produit->contains($product)) {
-            $this->Produit->add($product);
+        if (!$this->Produits->contains($product)) {
+            $this->Produits->add($product);
             $product->setCategiries($this);
         }
 
@@ -116,10 +116,70 @@ class Categorie
 
     public function removeProduct(Produit $product): self
     {
-        if ($this->Produit->removeElement($product)) {
+        if ($this->Produits->removeElement($product)) {
             // set the owning side to null (unless already changed)
             if ($product->getCategiries() === $this) {
                 $product->setCategiries(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Categorie>
+     */
+    public function getCategorie(): Collection
+    {
+        return $this->Categorie;
+    }
+
+    public function addCategorie(Categorie $categorie): self
+    {
+        if (!$this->Categorie->contains($categorie)) {
+            $this->Categorie->add($categorie);
+            $categorie->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategorie(Categorie $categorie): self
+    {
+        if ($this->Categorie->removeElement($categorie)) {
+            // set the owning side to null (unless already changed)
+            if ($categorie->getParent() === $this) {
+                $categorie->setParent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Produit>
+     */
+    public function getProduits(): Collection
+    {
+        return $this->Produits;
+    }
+
+    public function addProduit(Produit $produit): self
+    {
+        if (!$this->Produits->contains($produit)) {
+            $this->Produits->add($produit);
+            $produit->setCategirie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduit(Produit $produit): self
+    {
+        if ($this->Produits->removeElement($produit)) {
+            // set the owning side to null (unless already changed)
+            if ($produit->getCategirie() === $this) {
+                $produit->setCategirie(null);
             }
         }
 

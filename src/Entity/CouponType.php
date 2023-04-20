@@ -72,4 +72,12 @@ class CouponType
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Coupon>
+     */
+    public function getCoupon(): Collection
+    {
+        return $this->Coupon;
+    }
 }

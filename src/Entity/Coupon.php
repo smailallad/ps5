@@ -168,4 +168,46 @@ class Coupon
 
         return $this;
     }
+
+    public function getCouponType(): ?CouponType
+    {
+        return $this->coupon_type;
+    }
+
+    public function setCouponType(?CouponType $coupon_type): self
+    {
+        $this->coupon_type = $coupon_type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commande>
+     */
+    public function getCommande(): Collection
+    {
+        return $this->Commande;
+    }
+
+    public function addCommande(Commande $commande): self
+    {
+        if (!$this->Commande->contains($commande)) {
+            $this->Commande->add($commande);
+            $commande->setCoupon($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommande(Commande $commande): self
+    {
+        if ($this->Commande->removeElement($commande)) {
+            // set the owning side to null (unless already changed)
+            if ($commande->getCoupon() === $this) {
+                $commande->setCoupon(null);
+            }
+        }
+
+        return $this;
+    }
 }

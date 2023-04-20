@@ -2,10 +2,10 @@
 
 namespace App\Entity;
 
-use App\Repository\ImagesRepository;
+use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: ImagesRepository::class)]
+#[ORM\Entity(repositoryClass: ImageRepository::class)]
 class Image
 {
     #[ORM\Id]
@@ -43,6 +43,18 @@ class Image
     }
 
     public function setProducts(?Produit $Produit): self
+    {
+        $this->Produit = $Produit;
+
+        return $this;
+    }
+
+    public function getProduit(): ?Produit
+    {
+        return $this->Produit;
+    }
+
+    public function setProduit(?Produit $Produit): self
     {
         $this->Produit = $Produit;
 

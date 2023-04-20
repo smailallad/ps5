@@ -107,4 +107,46 @@ class Commande
 
         return $this;
     }
+
+    public function getCoupon(): ?Coupon
+    {
+        return $this->Coupon;
+    }
+
+    public function setCoupon(?Coupon $Coupon): self
+    {
+        $this->Coupon = $Coupon;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, CommandeDetail>
+     */
+    public function getCommandeDetail(): Collection
+    {
+        return $this->CommandeDetail;
+    }
+
+    public function addCommandeDetail(CommandeDetail $commandeDetail): self
+    {
+        if (!$this->CommandeDetail->contains($commandeDetail)) {
+            $this->CommandeDetail->add($commandeDetail);
+            $commandeDetail->setCommande($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommandeDetail(CommandeDetail $commandeDetail): self
+    {
+        if ($this->CommandeDetail->removeElement($commandeDetail)) {
+            // set the owning side to null (unless already changed)
+            if ($commandeDetail->getCommande() === $this) {
+                $commandeDetail->setCommande(null);
+            }
+        }
+
+        return $this;
+    }
 }

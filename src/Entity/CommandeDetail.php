@@ -71,4 +71,28 @@ class CommandeDetail
 
         return $this;
     }
+
+    public function getCommande(): ?Commande
+    {
+        return $this->Commande;
+    }
+
+    public function setCommande(?Commande $Commande): self
+    {
+        $this->Commande = $Commande;
+
+        return $this;
+    }
+
+    public function getProduit(): ?Produit
+    {
+        return $this->Produit;
+    }
+
+    public function setProduit(?Produit $Produit): self
+    {
+        $this->Produit = $Produit;
+
+        return $this;
+    }
 }
