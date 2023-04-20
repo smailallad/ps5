@@ -72,6 +72,7 @@ class CouponType
 
         return $this;
     }
+<<<<<<< HEAD
 
     /**
      * @return Collection<int, Coupon>
@@ -80,4 +81,6 @@ class CouponType
     {
         return $this->Coupon;
     }
+=======
+>>>>>>> 38fcca06cc387d979196fcb40902c48b781a6505
 }
